@@ -36,7 +36,7 @@ public class MenuFrame extends JFrame implements ActionListener {
     private final JLabel iconLabel, helloLabel, logoLabel;
     private final String deniedUserAccessLevel = "Attendant";
     private String loggedUserName = "Unknown user", loggedUserAccessLevel = deniedUserAccessLevel, fileData;
-    private final JButton newSaleButton, searchSaleButton, manageUsersButton, manageProductsButton, settingsButton, logoutButton;
+    private final JButton newSaleButton, searchSaleButton, manageUsersButton, manageProductsButton, logoutButton;
     private final Dimension buttonsDimension = new Dimension(200, 25), helloDimension = new Dimension(220, 25),
             mainPanelDimension = new Dimension((int) buttonsDimension.getWidth() + 40, 0);
     private final Color mainPanelColor = Color.white, logoPanelColor = Color.cyan, buttonColor = Color.black;
@@ -46,7 +46,6 @@ public class MenuFrame extends JFrame implements ActionListener {
             searchSaleIcon = new ImageIcon("images\\icons\\search_icon.png"),
             manageUsersIcon = new ImageIcon("images\\icons\\user_icon.png"),
             manageProductsIcon = new ImageIcon("images\\icons\\product_icon.png"),
-            settingsIcon = new ImageIcon("images\\icons\\settings_icon.png"),
             logoutIcon = new ImageIcon("images\\icons\\logout_icon.png");
     private final User currentlyLoggedUser;
     private final UserDAO userDAO;
@@ -135,8 +134,6 @@ public class MenuFrame extends JFrame implements ActionListener {
         manageProductsButton = new JButton("Manage products");
         setLineDesign(manageProductsIcon, manageProductsButton);
 
-        settingsButton = new JButton("Settings");
-        setLineDesign(settingsIcon, settingsButton);
 
         logoutButton = new JButton("Logout");
         setLineDesign(logoutIcon, logoutButton);
@@ -195,9 +192,7 @@ public class MenuFrame extends JFrame implements ActionListener {
                     new ManageProductsFrame();
                     this.dispose();
                 }
-            } else if (event.getSource().equals(settingsButton)) {
-                // TODO Add the settings functionality.
-            } else if (event.getSource().equals(logoutButton)) {
+            }  else if (event.getSource().equals(logoutButton)) {
                 String[] options = {"Yes", "No"};
                 int option = JOptionPane.showOptionDialog(null, "Are you sure you want to logout?", "Exit",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

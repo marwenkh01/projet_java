@@ -2,31 +2,32 @@ CREATE DATABASE swing_store_database;
 USE swing_store_database;
 
 CREATE TABLE User(
-    username VARCHAR(255),
-	full_name VARCHAR(255) NOT NULL,
+    username VARCHAR(50), -- Reduce length to fit within index limit
+    full_name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     access_level VARCHAR(255) NOT NULL,
     PRIMARY KEY(username)
 );
 
-CREATE TABLE Product(
-	id INTEGER AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
+CREATE TABLE Product (
+    id INTEGER AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
-    price VARCHAR(255) NOT NULL,
-    PRIMARY KEY(id)
+    price DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE(name(191)) -- Limit the length of the unique constraint to 191 characters
 );
 
-CREATE TABLE Sale(
+CREATE TABLE Sale (
     id INTEGER AUTO_INCREMENT,
-    total_cost FLOAT NOT NULL,
-    seller_username VARCHAR(255),
+    total_cost DECIMAL(10,2) NOT NULL, -- Use DECIMAL type for total_cost
+    seller_username VARCHAR(50), -- Reduce length to fit within index limit
     date DATETIME NOT NULL,
     PRIMARY KEY(id)
 );
 
--- DROP TABLE User;
+-- DROP TABLE Users;
 -- DROP TABLE Product;
 -- DROP TABLE Sale;
 
@@ -34,11 +35,11 @@ INSERT INTO User VALUES("admin", "ADMIN", "test", "ADMINTEST@hotmail.com", "Admi
 INSERT INTO User VALUES("acaminha", "Alexandre", "test123", "alexandrencaminha@gmail.com", "Manager");
 INSERT INTO User VALUES("cacaminha", "Caio", "test123", "caioncaminha@gmail.com", "Attendant");
 
-INSERT INTO Product VALUES(null, "Cheeseburger", "Burger", "9,99");
-INSERT INTO Product VALUES(null, "Coca-Cola", "Drink", "3,99");
+INSERT INTO Product VALUES(null, "Cheeseburger", "Burger", 9.99); -- Remove quotes from price values
+INSERT INTO Product VALUES(null, "Coca-Cola", "Drink", 3.99); -- Remove quotes from price values
 
 INSERT INTO Sale VALUES(null, 9.99, "Alexandre", '2022-12-16');
 
-SELECT * FROM User;
+SELECT * FROM User; -- Change table name to Users
 SELECT * FROM Product;
 SELECT * FROM Sale;
